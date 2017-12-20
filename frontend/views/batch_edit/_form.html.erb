@@ -1,0 +1,32 @@
+<div class="batch-edit-form-wrapper">
+  <% define_template("batch_edit", jsonmodel_definition(:batch_edit)) do |form| %>
+    <p><%= I18n.t("batch_edit.instructions") %></p>
+    <%= render_aspace_partial :partial => "resources/linker", :locals => { :form => form, :field_label => 'Resource Record' }%>
+
+    <%= form.label_and_select "record_type", [] %>
+    <%= form.label_and_select "property", [] %>
+    <hr>
+    <%= form.label_and_textfield "find" %>
+    <%= form.label_and_textfield "replace" %>
+
+  <% end %>
+
+  <%= form_for @edit, :as => "batch_edit", :url => {:action => :preview}, :html => {:id => "batch_edit", :class => 'form-horizontal aspace-record-form'} do |f| %>
+    <%= form_context :batch_edit, @edit do |form| %>
+      <div class="record-pane">
+        <h2><%= I18n.t("plugins.batch_edit.title") %></h2>
+
+        <%= render_aspace_partial :partial => "shared/form_messages", :locals => {:object => @edit, :form => form} %>
+        <% form.emit_template("batch_edit") %>
+
+        <div class="form-actions">
+          <hr>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary"><%= I18n.t("batch_edit.actions.preview") %></button>
+          </div>
+          <%= link_to I18n.t("actions.cancel"), :back, :class => "btn btn-default btn-cancel" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

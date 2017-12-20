@@ -1,0 +1,6 @@
+<%= setup_context :title => I18n.t("plugins.batch_edit.title") %>
+
+<%= render_aspace_partial :partial => "shared/flash_messages" %>
+<%= render_aspace_partial :partial => "form" %>
+
+<script src="<%= "#{AppConfig[:frontend_proxy_prefix]}assets/batch_edit.js"%>" type="text/javascript"></script>

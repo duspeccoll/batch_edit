@@ -1,0 +1,15 @@
+en:
+  plugins:
+    batch_edit:
+      label: Batch Edit
+      title: Batch Edit
+      preview: Preview Edits
+  batch_edit:
+    instructions: Select the Resource for which you wish to batch edit metadata, then select the field to edit. Currently you may only find and replace existing values, not create new values. Regular expressions are not yet supported.
+    record_type: Record Type
+    property: Property
+    find: String to Find
+    replace: Replacement String
+    actions:
+      approve: Approve Selected Edits
+      preview: Preview

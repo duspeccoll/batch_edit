@@ -1,0 +1,53 @@
+<%= setup_context :title => I18n.t("plugins.batch_edit.preview") %>
+
+<div class="record-pane">
+  <h2><%= I18n.t("plugins.batch_edit.preview") %></h2>
+  <p>Searching <%= @data['record_type'] %> for <%= @data['property'] %>, replacing "<%= @data['find'] %>" with "<%= @data['replace'] %>". There are <%= @data['results'].length %> results:</p>
+  <table id="batch_edit_results" class="table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th class="col selected"><input type="checkbox" id="selectAll"/></th>
+        <th class="col title">Title</th>
+        <th class="col component_id">Component ID</th>
+        <th class="col old_value">Old Value</th>
+        <th class="col new_value">New Value</th>
+        <th class="col actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @data['results'].each do |result| %>
+        <tr>
+          <td><input type="checkbox"/></td>
+          <td><%= result['title'] %></td>
+          <td><%= result['component_id'] %></td>
+          <td><%= result['old_value'] %></td>
+          <td><%= result['new_value'] %></td>
+          <td>
+            <div class="btn-group">
+              <a class="btn btn-xs btn-default" href="#">View</a>
+              <a class="btn btn-xs btn-primary" href="#">Replace</a>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary"><%= I18n.t("batch_edit.actions.approve") %></button>
+    </div>
+    <%= link_to I18n.t("actions.cancel"), :back, :class => "btn btn-default btn-cancel" %>
+  </div>
+</div>
+
+<script>
+  var $table = $("#batch_edit_results");
+
+  $("tbody td input:checkbox").change(function() {
+    $(this).closest("tr").toggleClass("selected", this.checked);
+  });
+
+  $('#selectAll').click(function(e) {
+    $('td input:checkbox', $table).prop('checked', this.checked).closest("tr").toggleClass("selected", this.checked);
+  });
+</script>
